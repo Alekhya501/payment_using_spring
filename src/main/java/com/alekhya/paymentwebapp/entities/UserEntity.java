@@ -10,8 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+
 @Table(name="user_details")
 public class UserEntity {
 	@Id
@@ -30,8 +29,10 @@ public class UserEntity {
 	private long phonenumber;
 	@Column(name="email")
 	private String email;
+	@Column(name="address")
+	private String address;
 	public UserEntity(int userid, String username, String password, String firstname, String lastname, long phonenumber,
-			String email) {
+			String email, String address) {
 		super();
 		this.userid = userid;
 		this.username = username;
@@ -40,15 +41,61 @@ public class UserEntity {
 		this.lastname = lastname;
 		this.phonenumber = phonenumber;
 		this.email = email;
+		this.address = address;
 	}
+	
 	public UserEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "UserEntity [userid=" + userid + ", username=" + username + ", password=" + password + ", firstname="
-				+ firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + "]";
+
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	public long getPhonenumber() {
+		return phonenumber;
+	}
+	public void setPhonenumber(long phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 

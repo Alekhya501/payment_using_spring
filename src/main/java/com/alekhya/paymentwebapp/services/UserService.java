@@ -9,17 +9,17 @@ import com.alekhya.paymentwebapp.entities.UserEntity;
 import com.alekhya.paymentwebapp.repositary.UserRepository;
 
 @Service
-public class Userservice {
+public class UserService {
 	@Autowired
 	public UserRepository userrepo;
+
 //
 //	public List<UserEntity> fetchUser() {
 //		System.out.println("user details");
 //		return userrepo.findAll();
 //	}
-	  public void saveUser(UserEntity user) {
-	        userrepo.save(user);
-	    }
-	
+	public void saveUser(UserEntity user) {
+		userrepo.save(user);
+	}
 
 }

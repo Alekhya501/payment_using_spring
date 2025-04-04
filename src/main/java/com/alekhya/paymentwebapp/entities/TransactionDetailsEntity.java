@@ -8,8 +8,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name="txn_details")
 public class TransactionDetailsEntity {
 	@Id
@@ -28,5 +32,12 @@ public class TransactionDetailsEntity {
 	private String desttype;
 	@Column(name="txn_amount")
 	private String transactionamount;
+	@Override
+	public String toString() {
+		return "TransactionDetailsEntity [transactionid=" + transactionid + ", datetime=" + datetime + ", sourseid="
+				+ sourseid + ", destid=" + destid + ", soursetype=" + soursetype + ", desttype=" + desttype
+				+ ", transactionamount=" + transactionamount + "]";
+	}
+	
 	
 }

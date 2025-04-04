@@ -1,13 +1,15 @@
 package com.alekhya.paymentwebapp.Dtos;
 
 public class UserDto {
-	private String userid;
+	private int userid;
 	private String username;
 	private String firstname;
 	private String lastname;
 	private String email;
 	private String address;
-	public UserDto(String userid, String username, String firstname, String lastname, String email, String address) {
+	private long phonenumber;
+	public UserDto(int userid, String username, String firstname, String lastname, String email, String address,
+			long phonenumber) {
 		super();
 		this.userid = userid;
 		this.username = username;
@@ -15,15 +17,12 @@ public class UserDto {
 		this.lastname = lastname;
 		this.email = email;
 		this.address = address;
+		this.phonenumber = phonenumber;
 	}
-	public UserDto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public String getUserid() {
+	public int getUserid() {
 		return userid;
 	}
-	public void setUserid(String userid) {
+	public void setUserid(int userid) {
 		this.userid = userid;
 	}
 	public String getUsername() {
@@ -56,9 +55,16 @@ public class UserDto {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public long getPhonenumber() {
+		return phonenumber;
+	}
+	public void setPhonenumber(long phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+	@Override
+	public String toString() {
+		return "UserDto [userid=" + userid + ", username=" + username + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", email=" + email + ", address=" + address + ", phonenumber=" + phonenumber + "]";
+	}
 	
-	
-	
-	
-
 }

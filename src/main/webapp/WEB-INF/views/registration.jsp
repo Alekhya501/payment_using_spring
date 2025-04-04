@@ -88,14 +88,14 @@ h2 {
 
 	<div class="container">
 		<h2>Registration</h2>
-		<form action="Registration" method="POST">
+		<form action="register" method="POST">
 		<div class="input-group">
 				<label for="userid">User id</label> <input type="text"
 					id="userid" name="userid" required>
 			</div>
 			<div class="input-group">
 				<label for="userName">User Name</label> <input type="text"
-					id="userName" name="userName" required>
+					id="userName" name="username" required>
 			</div>
 			<div class="input-group">
 				<label for="password">Password</label> <input type="password"
@@ -103,15 +103,15 @@ h2 {
 			</div>
 			<div class="input-group">
 				<label for="firstName">First Name</label> <input type="text"
-					id="firstName" name="firstName" required>
+					id="firstName" name="firstname" required>
 			</div>
 			<div class="input-group">
 				<label for="lastName">Last Name</label> <input type="text"
-					id="lastName" name="lastName" required>
+					id="lastName" name="lastname" required>
 			</div>
 			<div class="input-group">
 				<label for="phone">Phone Number</label> <input type="tel" id="phone"
-					name="phone" required>
+					name="phonenumber" required>
 			</div>
 			<div class="input-group">
 				<label for="email">Email</label> <input type="email" id="email"
