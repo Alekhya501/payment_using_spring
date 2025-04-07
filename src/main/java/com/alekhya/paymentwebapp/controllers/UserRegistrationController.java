@@ -2,6 +2,7 @@ package com.alekhya.paymentwebapp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alekhya.paymentwebapp.Dtos.UserDto;
 import com.alekhya.paymentwebapp.entities.UserEntity;
-import com.alekhya.paymentwebapp.repositary.UserRepository;
 import com.alekhya.paymentwebapp.services.UserService;
 
 
@@ -39,12 +39,14 @@ public class UserRegistrationController {
     public String registerUser(@ModelAttribute UserDto userdto) {
 	   System.out.println(userdto);
        UserEntity userentity=new UserEntity();
+//       userentity.setUserid(userdto.getUserid());
        userentity.setUsername(userdto.getUsername());
        userentity.setFirstname(userdto.getFirstname());
        userentity.setLastname(userdto.getLastname());
        userentity.setPhonenumber(userdto.getPhonenumber());
        userentity.setAddress(userdto.getAddress());
        userentity.setEmail(userdto.getEmail());
+       userentity.setPassword(userdto.getPassword());
        System.out.println(userentity);
        userservice.saveUser(userentity);
         return "login"; 

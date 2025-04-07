@@ -78,10 +78,10 @@
 <body>
     <div class="container">
         <h2>Login</h2>
-        <form action="Login" method="post">
+        <form action="/login" method="post">
             <div class="input-group">
-                <label for="userName">User Name</label>
-                <input type="text" id="userName" name="userName" required>
+                <label for="Email">Email</label>
+                <input type="text" id="email" name="email" required>
             </div>
             <div class="input-group">
                 <label for="password">Password</label>

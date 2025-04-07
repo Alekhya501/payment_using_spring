@@ -8,8 +8,13 @@ public class UserDto {
 	private String email;
 	private String address;
 	private long phonenumber;
+	private String password;
+	public UserDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public UserDto(int userid, String username, String firstname, String lastname, String email, String address,
-			long phonenumber) {
+			long phonenumber, String password) {
 		super();
 		this.userid = userid;
 		this.username = username;
@@ -18,6 +23,7 @@ public class UserDto {
 		this.email = email;
 		this.address = address;
 		this.phonenumber = phonenumber;
+		this.password = password;
 	}
 	public int getUserid() {
 		return userid;
@@ -61,10 +67,11 @@ public class UserDto {
 	public void setPhonenumber(long phonenumber) {
 		this.phonenumber = phonenumber;
 	}
-	@Override
-	public String toString() {
-		return "UserDto [userid=" + userid + ", username=" + username + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", email=" + email + ", address=" + address + ", phonenumber=" + phonenumber + "]";
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

@@ -98,8 +98,8 @@ body {
 	<div class="header">
 		<span>SecurePay</span>
 		<div class="nav-buttons">
-			<a href="Login.jsp"><button class="btn login">Login</button></a>
-			<a href="Registration.jsp"><button class="btn register">Register</button></a>
+			<a href="/login"><button class="btn login">Login</button></a>
+			<a href="/register"><button class="btn register">Register</button></a>
 		</div>
 	</div>
 	<div class="content">

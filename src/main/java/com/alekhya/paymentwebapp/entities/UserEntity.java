@@ -19,7 +19,7 @@ public class UserEntity {
 	private int userid;
 	@Column(name="user_name")
 	private String username;
-	@Column(name="pass")
+	@Column(name="password")
 	private String password;
 	@Column(name="first_name")
 	private String firstname;
@@ -27,7 +27,7 @@ public class UserEntity {
 	private String lastname;
 	@Column(name="ph_no")
 	private long phonenumber;
-	@Column(name="email")
+	@Column(name="email",unique = true)
 	private String email;
 	@Column(name="address")
 	private String address;
