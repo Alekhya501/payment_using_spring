@@ -1,45 +1,19 @@
-package com.alekhya.paymentwebapp.entities;
+package com.alekhya.paymentwebapp.Dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import com.alekhya.paymentwebapp.entities.UserEntity;
 
-@Entity
+public class BankAccountDto {
 
-@Table(name="BankAccounts")
-public class BankAccountEntity {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="bank_account_id")
 	private int bankaccountid;
-	@Column(name="bank_account_no")
 	private String bankaccountno;
-	@Column(name="ifsc")
 	private String ifsc;
-	@Column(name="bank_name")
 	private String bankname;
-	@Column(name="bank_branch")
 	private String branch;
-	@Column(name="isactive")
 	private String isActive;
-	@Column(name="balance")
 	private long currentBalance;
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private UserEntity user;
-	public BankAccountEntity() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public BankAccountEntity(int bankaccountid, String bankaccountno, String ifsc, String bankname, String branch,
-			String isActive, long currentBalance, UserEntity user) {
+	private UserDto user;
+	public BankAccountDto(int bankaccountid, String bankaccountno, String ifsc, String bankname, String branch,
+			String isActive, long currentBalance, UserDto user) {
 		super();
 		this.bankaccountid = bankaccountid;
 		this.bankaccountno = bankaccountno;
@@ -49,6 +23,10 @@ public class BankAccountEntity {
 		this.isActive = isActive;
 		this.currentBalance = currentBalance;
 		this.user = user;
+	}
+	public BankAccountDto() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public int getBankaccountid() {
 		return bankaccountid;
@@ -92,12 +70,12 @@ public class BankAccountEntity {
 	public void setCurrentBalance(long currentBalance) {
 		this.currentBalance = currentBalance;
 	}
-	public UserEntity getUser() {
+	public UserDto getUser() {
 		return user;
 	}
-	public void setUser(UserEntity user) {
+	public void setUser(UserDto user) {
 		this.user = user;
 	}
 	
-	
+
 }

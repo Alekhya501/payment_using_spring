@@ -143,10 +143,10 @@ body {
 		<h3>
 			Welcome <span></span>
 		</h3>
-		<p>Bank Name:</p>
-		<p>Primary Bank Account No:</p>
-		<p>Account Balance:</p>
-		<p>Wallet Balance:</p>
+		<p>Bank Name:${bank.bankname }</p>
+		<p>Primary Bank Account No:${bank.bankaccountno }</p>
+		<p>Account Balance:${bank.CurrentBalance }</p>
+		
 		<form action="sendmoney" >
 			<button class="send-money-btn">Send Money</button>
 		</form>

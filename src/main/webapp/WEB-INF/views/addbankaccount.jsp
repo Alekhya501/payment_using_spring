@@ -71,28 +71,28 @@
         <div class="title">Add Bank Account</div>
         <br><br>
         <div class="form-container">
-            <form action="AddBankAccount" method="post">
-	            <label>Bank account id:</label>
-	            <input type="text" name="bank_account_id" required>
-	            <label>user id:</label>
-                <input type="text" name="user_id" required>
+            <form action="/addnewbankaccount" method="post">
+	           
 	            
             
                 <label>Bank Name:</label>
-                <input type="text" name="bank_name" required>
+                <input type="text" name="bankname" required>
                  
 
                 <label>Account Number:</label>
-                <input type="text" name="account_no" required>
+                <input type="text" name="bankaccountno" required>
 
                 <label>Account Type Active Or not :</label>
-                <input type="text" name="account_type" required>
+                <input type="text" name="isActive" required>
 
                 <label>Ifsc code:</label>
                 <input type="text" name="ifsc" required>
+                
+                 <label>branch :</label>
+                <input type="text" name="branch" required>
 
                 <label>Current balance:</label>
-                <input type="number" name="balance" required>
+                <input type="number" name="currentBalance" required>
 
                 
 
