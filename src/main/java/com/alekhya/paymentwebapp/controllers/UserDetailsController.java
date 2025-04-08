@@ -35,10 +35,24 @@ public class UserDetailsController {
 	}
 
 	@PostMapping("/usereditprofile")
-	public String updateProfile(UserEntity user) {
-		userservice.saveUser(user);
+	public String updateProfile(UserEntity updatedData, HttpSession session) {
+		String email = (String) session.getAttribute("email");
+        Optional<UserEntity> optionalUser = userservice.getUserByEmail(email);
 
-		return "dashboard";
-	}
+        if (optionalUser.isPresent()) {
+            UserEntity existingUser = optionalUser.get();
+            existingUser.setFirstname(updatedData.getFirstname());
+            existingUser.setLastname(updatedData.getLastname());
+            existingUser.setPhonenumber(updatedData.getPhonenumber());
+            existingUser.setAddress(updatedData.getAddress());
+            existingUser.setUsername(updatedData.getUsername());
+            existingUser.setPassword(updatedData.getPassword());
+
+            userservice.saveUser(existingUser); 
+        }
+
+        return "redirect:/dashboard";
+    }
+	
 
 }

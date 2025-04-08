@@ -35,22 +35,20 @@ public class DashBoardController {
 		return "detailedstatement";
 	}
 	@GetMapping("/dashboard")
-	public String showDashBoardPage(HttpSession session,Model model) {
-		String email=(String) session.getAttribute("email");
-		if(email!=null) {
-			Optional<UserEntity> profiledetails=userservice.getUserByEmail(email);
-			if(profiledetails.isPresent()) {
-				UserEntity userEntity = profiledetails.get();
-				UserDto user=new UserDto();
-				user.setUsername(userEntity.getUsername());
-				user.setFirstname(userEntity.getFirstname());
-				user.setEmail(userEntity.getEmail());
-				user.setPhonenumber(userEntity.getPhonenumber());
-				model.addAttribute("user",user);
-			}
-		}
-		return "dashboard";
-		
+	public String showDashBoardPage(HttpSession session, Model model) {
+	    String email = (String) session.getAttribute("email");
+
+	    if (email != null) {
+	        Optional<UserEntity> profiledetails = userservice.getUserByEmail(email);
+
+	        if (profiledetails.isPresent()) {
+	            UserEntity user = profiledetails.get();
+	            session.setAttribute("user", user); 
+	            model.addAttribute("user", user);  
+	        }
+	    }
+
+	    return "dashboard";
 	}
 	
 

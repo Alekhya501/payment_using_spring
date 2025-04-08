@@ -119,7 +119,7 @@ body {
 
 	<div class="header">
 		<h2>Payments Web App</h2>
-		<form action="Logout" method="Post">
+		<form action="/logout">
 			<button type="submit" class="logout-btn">Logout</button>
 		</form>
 
@@ -131,9 +131,9 @@ body {
 
 	<div class="section">
 		<p>Welcome ${user.username } </p>
-		<p>Name: ${user.firstname }</p>
-		<p>Email:${user.email }</p>
-		<p>phone-number:${user.phonenumber }</p>
+		<p>Name : ${user.lastname }</p>
+		<p>Email : ${user.email }</p>
+		<p>phone-number : ${user.phonenumber }</p>
 		<form action="/usereditprofile">
 		<button class="plus-button">Edit</button>
 		</form>
