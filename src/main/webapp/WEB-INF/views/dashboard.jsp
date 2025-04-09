@@ -143,9 +143,22 @@ body {
 		<h3>
 			Primary Bank Account<span></span>
 		</h3>
-		<p>Bank Name:${bankDetails.bankname }</p>
-		<p>Primary Bank Account No:${bankDetails.bankaccountno }</p>
-		<p>Account Balance:${bankDetails.CurrentBalance }</p>
+		<%
+    com.alekhya.paymentwebapp.entities.BankAccountEntity primaryAccount = 
+        (com.alekhya.paymentwebapp.entities.BankAccountEntity) request.getAttribute("primaryAccount");
+    if (primaryAccount != null) {
+%>
+    <p>Bank Name: <%= primaryAccount.getBankname() %></p>
+    <p>Primary Bank Account No: <%= primaryAccount.getBankaccountno() %></p>
+    <p>Account Balance: ₹ <%= primaryAccount.getCurrentBalance() %></p>
+<%
+    } else {
+%>
+    <p>No primary account found.</p>
+<%
+    }
+%>
+
 		
 		<form action="sendmoney" >
 			<button class="send-money-btn">Send Money</button>

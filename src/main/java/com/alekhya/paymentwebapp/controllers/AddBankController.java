@@ -49,8 +49,7 @@ public class AddBankController {
 	        bankservice.addBankAccount(bankAccEntity);  
 
 	       
-	        Optional<BankAccountEntity> bankDetails = bankservice.findAccountDetailsById(user.getUserid());
-	        session.setAttribute("bankdetails", bankDetails);  
+	       
 	    }
 
 	    return "redirect:/dashboard";

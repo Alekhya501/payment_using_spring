@@ -55,28 +55,29 @@ public class DashBoardController {
 
 	    return "dashboard";
 	}
-	@GetMapping("/displaybankdetails")
-	public String displayingBankDetaisInDashboard(HttpSession session,Model model) {
-//		String email=(String)session.getAttribute("email");
-//		if(email!=null) {
-//			Optional<UserEntity> userdetails=userservice.getUserByEmail(email);
-//			if(userdetails.isPresent()) {
-//				UserEntity user=userdetails.get();
-//				Optional<BankAccountEntity> accounts=bankservice.findUserById(user.getUserid());
-//				model.addAttribute("accounts",accounts);
-//				
-//			}
+//	@GetMapping("/displaybankdetails")
+//	public String displayingBankDetaisInDashboard(HttpSession session,Model model) {
+////		String email=(String)session.getAttribute("email");
+////		if(email!=null) {
+////			Optional<UserEntity> userdetails=userservice.getUserByEmail(email);
+////			if(userdetails.isPresent()) {
+////				UserEntity user=userdetails.get();
+////				Optional<BankAccountEntity> accounts=bankservice.findUserById(user.getUserid());
+////				model.addAttribute("accounts",accounts);
+////				
+////			}
+////		}
+////		return "dashboard";
+//		Long id=(Long) session.getAttribute("bankId");
+//		Optional<BankAccountEntity> account = bankservice.findAccountDetailsById(id.intValue()); 
+//
+//		if (account.isPresent()) {
+//		    model.addAttribute("bankDetails", account.get());
 //		}
 //		return "dashboard";
-		Long id=(Long) session.getAttribute("bankId");
-		Optional<BankAccountEntity> account = bankservice.findAccountDetailsById(id.intValue()); 
-
-		if (account.isPresent()) {
-		    model.addAttribute("bankDetails", account.get());
-		}
-		return "dashboard";
-		
-	}
-	
-
+//		
+//	}
+//	
+//
+//}
 }
