@@ -1,5 +1,6 @@
 package com.alekhya.paymentwebapp.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.alekhya.paymentwebapp.Dtos.UserDto;
+import com.alekhya.paymentwebapp.entities.BankAccountEntity;
 import com.alekhya.paymentwebapp.entities.UserEntity;
+import com.alekhya.paymentwebapp.services.BankService;
 import com.alekhya.paymentwebapp.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -17,10 +20,12 @@ import jakarta.servlet.http.HttpSession;
 public class DashBoardController {
 	@Autowired
 	UserService userservice;
+	@Autowired
+	BankService bankservice;
 	@GetMapping("/sendmoney")
 	public String showSendMoneyPage() {
 		return "sendmoney";
-		
+	
 	}
 	@GetMapping("/editprofile")
 	public String showEditProfilePage() {
@@ -49,6 +54,28 @@ public class DashBoardController {
 	    }
 
 	    return "dashboard";
+	}
+	@GetMapping("/displaybankdetails")
+	public String displayingBankDetaisInDashboard(HttpSession session,Model model) {
+//		String email=(String)session.getAttribute("email");
+//		if(email!=null) {
+//			Optional<UserEntity> userdetails=userservice.getUserByEmail(email);
+//			if(userdetails.isPresent()) {
+//				UserEntity user=userdetails.get();
+//				Optional<BankAccountEntity> accounts=bankservice.findUserById(user.getUserid());
+//				model.addAttribute("accounts",accounts);
+//				
+//			}
+//		}
+//		return "dashboard";
+		Long id=(Long) session.getAttribute("bankId");
+		Optional<BankAccountEntity> account = bankservice.findAccountDetailsById(id.intValue()); 
+
+		if (account.isPresent()) {
+		    model.addAttribute("bankDetails", account.get());
+		}
+		return "dashboard";
+		
 	}
 	
 

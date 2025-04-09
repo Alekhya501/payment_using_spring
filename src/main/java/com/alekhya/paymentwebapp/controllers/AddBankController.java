@@ -1,5 +1,6 @@
 package com.alekhya.paymentwebapp.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,26 +30,30 @@ public class AddBankController {
 		return "addbankaccount";
 	}
 	@PostMapping("/addnewbankaccount")
-	public String addingBankAccount(@ModelAttribute BankAccountDto bankAccDto,Model model,HttpSession session) {
-		BankAccountEntity bankAccEntity=new BankAccountEntity();
-		bankAccEntity.setBankaccountno(bankAccDto.getBankaccountno());
-		bankAccEntity.setBankname(bankAccDto.getBankname());
-		bankAccEntity.setBranch(bankAccDto.getBranch());
-		bankAccEntity.setCurrentBalance(bankAccDto.getCurrentBalance());
-		bankAccEntity.setIfsc(bankAccDto.getIfsc());
-		bankAccEntity.setIsActive(bankAccDto.getIsActive());
-		String email=(String) session.getAttribute("email");
-		Optional<UserEntity> loggedInUser=userservice.getUserByEmail(email);
-		if(loggedInUser.isPresent()) {
-			
-			bankAccEntity.setUser(loggedInUser.get());
-		}
-	
-		model.addAttribute("bank",bankAccEntity);
-		bankservice.addBankAccount(bankAccEntity);
-		
-		
-		return "redirect:/dashboard";
-		
+	public String addingBankAccount(@ModelAttribute BankAccountDto bankAccDto, HttpSession session) {
+	    BankAccountEntity bankAccEntity = new BankAccountEntity();
+	    bankAccEntity.setBankaccountno(bankAccDto.getBankaccountno());
+	    bankAccEntity.setBankname(bankAccDto.getBankname());
+	    bankAccEntity.setBranch(bankAccDto.getBranch());
+	    bankAccEntity.setCurrentBalance(bankAccDto.getCurrentBalance());
+	    bankAccEntity.setIfsc(bankAccDto.getIfsc());
+	    bankAccEntity.setIsActive(bankAccDto.getIsActive());
+
+	    String email = (String) session.getAttribute("email");
+	    Optional<UserEntity> loggedInUser = userservice.getUserByEmail(email);
+
+	    if (loggedInUser.isPresent()) {
+	        UserEntity user = loggedInUser.get();
+	        bankAccEntity.setUser(user);
+
+	        bankservice.addBankAccount(bankAccEntity);  
+
+	       
+	        Optional<BankAccountEntity> bankDetails = bankservice.findAccountDetailsById(user.getUserid());
+	        session.setAttribute("bankdetails", bankDetails);  
+	    }
+
+	    return "redirect:/dashboard";
 	}
+
 }

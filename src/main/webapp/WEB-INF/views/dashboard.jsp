@@ -141,11 +141,11 @@ body {
 
 	<div class="section">
 		<h3>
-			Welcome <span></span>
+			Primary Bank Account<span></span>
 		</h3>
-		<p>Bank Name:${bank.bankname }</p>
-		<p>Primary Bank Account No:${bank.bankaccountno }</p>
-		<p>Account Balance:${bank.CurrentBalance }</p>
+		<p>Bank Name:${bankDetails.bankname }</p>
+		<p>Primary Bank Account No:${bankDetails.bankaccountno }</p>
+		<p>Account Balance:${bankDetails.CurrentBalance }</p>
 		
 		<form action="sendmoney" >
 			<button class="send-money-btn">Send Money</button>
@@ -163,10 +163,10 @@ body {
 	 --%>
 	<div class="section bank-details">
 		<div class="bank-card">
-			<h4>Bank Name:...</h4>
-			<p>Bank Acct No:...</p>
-			<p>Balance:...</p>
-			<p>IFSC Code:...</p>
+			<h4>Bank Name:${bankDetails.bankname }</h4>
+			<p>Bank Acct No:${bankDetails.bankaccountno }</p>
+			<p>Balance:${bankDetails.CurrentBalance }</p>
+			<p>IFSC Code:${bankDetails.ifsc }</p>
 
 			<form action="editprofile" method="get"> 
 			<button class="plus-button">Edit</button></form>

@@ -1,5 +1,8 @@
 package com.alekhya.paymentwebapp.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +18,10 @@ public class BankService {
 		bankAccount.save(bankAccEntity);
 		
 	}
-	public void findUserById(int id) {
-		bankAccount.findById(id);
+	public Optional<BankAccountEntity> findAccountDetailsById(int id) {
+		return bankAccount.findById(id);
+		
 	}
+	
 
 }
