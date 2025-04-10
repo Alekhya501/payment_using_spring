@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@page import="java.util.List"%>
+    pageEncoding="UTF-8"%>
 <%@ page session="true" %>
-<%@page import="com.alekhya.paymentwebapp.Dtos.UserDto" %>
-<%@ page import="jakarta.servlet.http.HttpSession"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.alekhya.paymentwebapp.Dtos.UserDto" %>
+<%@ page import="com.alekhya.paymentwebapp.Dtos.ViewBankDto" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,200 +12,191 @@
 <title>Dashboard</title>
 <style>
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
-
 body {
-	background-color: #f4f4f4;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 20px;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
-
 .header {
-	width: 100%;
-	max-width: 900px;
-	background: white;
-	padding: 15px;
-	border-radius: 10px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-	text-align: center;
-	margin-bottom: 20px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
 .header h2 {
-	color: green;
+    color: green;
 }
-
 .logout-btn {
-	background: red;
-	color: white;
-	padding: 8px 15px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
+    background: red;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
-
 .section {
-	width: 100%;
-	max-width: 900px;
-	background: white;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-	margin-bottom: 20px;
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
-
 .bank-details, .transactions {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
-
 .bank-card {
-	border: 2px solid orange;
-	padding: 15px;
-	border-radius: 10px;
-	width: 30%;
-	text-align: center;
+    border: 2px solid orange;
+    padding: 15px;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    margin-top: 10px;
 }
-
 .transaction-list {
-	width: 100%;
-	text-align: left;
-	padding: 10px;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
 }
-
 .send-money-btn {
-	background: blue;
-	color: white;
-	padding: 10px 20px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-top: 10px;
+    background: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
-
 .plus-button {
-	background: green;
-	color: white;
-	padding: 8px 10px;
-	border-radius: 5px;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 15px;
+    background: green;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
 }
-
 .detailed-btn {
-	background: blue;
-	color: white;
-	padding: 10px 15px;
-	border-radius: 5px;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 14px;
+    background: blue;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
 }
 </style>
 </head>
 <body>
 
-	<div class="header">
-		<h2>Payments Web App</h2>
-		<form action="/logout">
-			<button type="submit" class="logout-btn">Logout</button>
-		</form>
+    <div class="header">
+        <h2>Payments Web App</h2>
+        <form action="/logout">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
 
-	</div>
-	
-	
-	
-	 
+    <div class="section">
+        <%
+        com.alekhya.paymentwebapp.Dtos.UserDto user =
+            (com.alekhya.paymentwebapp.Dtos.UserDto) session.getAttribute("user");
+        if (user != null) {
+        %>
+            <p>Welcome <%= user.getUsername() %></p>
+            <p>Name : <%= user.getLastname() %></p>
+            <p>Email : <%= user.getEmail() %></p>
+            <p>Phone Number : <%= user.getPhonenumber() %></p>
+        <% } else { %>
+            <p>User details not available.</p>
+        <% } %>
 
-	<div class="section">
-		<p>Welcome ${user.username } </p>
-		<p>Name : ${user.lastname }</p>
-		<p>Email : ${user.email }</p>
-		<p>phone-number : ${user.phonenumber }</p>
-		<form action="/usereditprofile">
-		<button class="plus-button">Edit</button>
-		</form>
-	</div>
+        <form action="/usereditprofile">
+            <button class="plus-button">Edit</button>
+        </form>
+    </div>
 
-	<div class="section">
-		<h3>
-			Primary Bank Account<span></span>
-		</h3>
-		<%
-    com.alekhya.paymentwebapp.entities.BankAccountEntity primaryAccount = 
-        (com.alekhya.paymentwebapp.entities.BankAccountEntity) request.getAttribute("primaryAccount");
-    if (primaryAccount != null) {
-%>
-    <p>Bank Name: <%= primaryAccount.getBankname() %></p>
-    <p>Primary Bank Account No: <%= primaryAccount.getBankaccountno() %></p>
-    <p>Account Balance: ₹ <%= primaryAccount.getCurrentBalance() %></p>
-<%
-    } else {
-%>
-    <p>No primary account found.</p>
-<%
-    }
-%>
+    <div class="section">
+        <h3>Primary Bank Account</h3>
+        <%
+            ViewBankDto primaryAccount = (ViewBankDto) request.getAttribute("primaryAccount");
+            if (primaryAccount != null) {
+        %>
+            <div class="bank-card">
+                <p><strong>Bank Name:</strong> <%= primaryAccount.getBankName() %></p>
+                <p><strong>Account No:</strong> <%= primaryAccount.getBankAccountNo() %></p>
+                <p><strong>Balance:</strong> ₹ <%= primaryAccount.getCurrentBalance() %></p>
+                <p><strong>IFSC:</strong> <%= primaryAccount.getIfsc() %></p>
+            </div>
+        <%
+            } else {
+        %>
+            <p>No primary account found.</p>
+        <%
+            }
+        %>
+        <form action="sendmoney" method="get">
+            <button class="send-money-btn">Send Money</button>
+        </form>
+    </div>
 
-		
-		<form action="sendmoney" >
-			<button class="send-money-btn">Send Money</button>
-		</form>
-	</div>
-	<%--
-	<% 
-	BankAccountDao bankDao=new BankAccountDao();
-	List<BankAccount> bankAccs=bankDao.getAllBankAccounts(1);
-	for(BankAccount accounts:bankAccs)
-	{
-		
-	
-	%>
-	 --%>
-	<div class="section bank-details">
-		<div class="bank-card">
-			<h4>Bank Name:${bankDetails.bankname }</h4>
-			<p>Bank Acct No:${bankDetails.bankaccountno }</p>
-			<p>Balance:${bankDetails.CurrentBalance }</p>
-			<p>IFSC Code:${bankDetails.ifsc }</p>
+    <div class="section">
+        <h3>All Active Bank Accounts</h3>
+        <%
+            List<ViewBankDto> bankList = (List<ViewBankDto>) request.getAttribute("bankList");
+            if (bankList != null && !bankList.isEmpty()) {
+                for (ViewBankDto bank : bankList) {
+        %>
+            <div class="bank-card">
+                <p><strong>Bank Name:</strong> <%= bank.getBankName() %></p>
+                <p><strong>Account No:</strong> <%= bank.getBankAccountNo() %></p>
+                <p><strong>Balance:</strong> ₹ <%= bank.getCurrentBalance() %></p>
+                <p><strong>IFSC:</strong> <%= bank.getIfsc() %></p>
+                <form action="editbankaccount" method="get">
+                    <button class="plus-button">Edit</button>
+                </form>
+            </div>
+        <%
+                }
+            } else {
+        %>
+            <p>No other bank accounts found.</p>
+        <%
+            }
+        %>
+        <form action="addbankaccount" method="get">
+            <button class="plus-button">+ Add Bank Account</button>
+        </form>
+    </div>
 
-			<form action="editprofile" method="get"> 
-			<button class="plus-button">Edit</button></form>
-		</div>
-		<%--
-		<%
-	}
-		%>
-		 --%>
+    <div class="section transactions">
+        <h4>Recent 10 Transactions</h4>
+        <div class="transaction-list">
+            <p>1000 sent to Sai</p>
+            <p>1300 received from Hema</p>
+            <p>120 received from 800839</p>
+            <p>...</p>
+            <form action="/detailedstatement" method="get">
+                <button class="detailed-btn">Detailed Stmt</button>
+            </form>
+        </div>
+    </div>
 
-		<form action="addbankaccount" method="get">
-			<button class="plus-button">+ Add Bank Account</button>
-		</form>
-	</div>
-	</div>
-	<div class="section transactions">
-		<h4>Recent 10 Transactions</h4>
-		<div class="transaction-list">
-			<p>1000 sent to Sai</p>
-			<p>1300 received from Hema</p>
-			<p>120 received from 800839</p>
-			<p>...</p>
-			<p>...</p>
-			<form action="/detailedstatement" method="get">
-				<button class="detailed-btn">Detailed Stmt</button>
-			</form>
-		</div>
-	</div>
 </body>
 </html>

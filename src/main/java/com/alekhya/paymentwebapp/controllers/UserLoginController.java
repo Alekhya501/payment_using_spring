@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alekhya.paymentwebapp.Dtos.LoginDto;
+import com.alekhya.paymentwebapp.Dtos.UserDto;
 import com.alekhya.paymentwebapp.entities.UserEntity;
 import com.alekhya.paymentwebapp.services.UserService;
 
@@ -34,7 +35,12 @@ public class UserLoginController {
 		UserEntity loggedInUser=userService.autenticateUser(email,password);
 		
 		if(loggedInUser!=null) {
-			session.setAttribute("email", email);
+			UserDto userDto = new UserDto();
+			userDto.setEmail(loggedInUser.getEmail());
+			
+
+
+			session.setAttribute("user", userDto);
 			
 			System.out.println("login successfull");
 			 return "redirect:/dashboard";

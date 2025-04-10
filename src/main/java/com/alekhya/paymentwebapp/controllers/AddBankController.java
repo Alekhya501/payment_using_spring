@@ -24,35 +24,34 @@ public class AddBankController {
 	BankService bankservice;
 	@Autowired
 	UserService userservice;
+
 	@GetMapping("/addnewbankaccount")
-	public String showAdddBankAccountForm()
-	{
+	public String showAdddBankAccountForm() {
 		return "addbankaccount";
 	}
+
 	@PostMapping("/addnewbankaccount")
 	public String addingBankAccount(@ModelAttribute BankAccountDto bankAccDto, HttpSession session) {
-	    BankAccountEntity bankAccEntity = new BankAccountEntity();
-	    bankAccEntity.setBankaccountno(bankAccDto.getBankaccountno());
-	    bankAccEntity.setBankname(bankAccDto.getBankname());
-	    bankAccEntity.setBranch(bankAccDto.getBranch());
-	    bankAccEntity.setCurrentBalance(bankAccDto.getCurrentBalance());
-	    bankAccEntity.setIfsc(bankAccDto.getIfsc());
-	    bankAccEntity.setIsActive(bankAccDto.getIsActive());
+		BankAccountEntity bankAccEntity = new BankAccountEntity();
+		bankAccEntity.setBankaccountno(bankAccDto.getBankaccountno());
+		bankAccEntity.setBankname(bankAccDto.getBankname());
+		bankAccEntity.setBranch(bankAccDto.getBranch());
+		bankAccEntity.setCurrentBalance(bankAccDto.getCurrentBalance());
+		bankAccEntity.setIfsc(bankAccDto.getIfsc());
+		bankAccEntity.setIsActive(bankAccDto.getIsActive());
 
-	    String email = (String) session.getAttribute("email");
-	    Optional<UserEntity> loggedInUser = userservice.getUserByEmail(email);
+		String email = (String) session.getAttribute("email");
+		Optional<UserEntity> loggedInUser = userservice.getUserByEmail(email);
 
-	    if (loggedInUser.isPresent()) {
-	        UserEntity user = loggedInUser.get();
-	        bankAccEntity.setUser(user);
+		if (loggedInUser.isPresent()) {
+			UserEntity user = loggedInUser.get();
+			bankAccEntity.setUser(user);
 
-	        bankservice.addBankAccount(bankAccEntity);  
+			bankservice.addBankAccount(bankAccEntity);
 
-	       
-	       
-	    }
+		}
 
-	    return "redirect:/dashboard";
+		return "redirect:/dashboard";
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.alekhya.paymentwebapp.Dtos.UserDto;
+import com.alekhya.paymentwebapp.Dtos.ViewBankDto;
 import com.alekhya.paymentwebapp.entities.BankAccountEntity;
 import com.alekhya.paymentwebapp.entities.UserEntity;
 import com.alekhya.paymentwebapp.services.BankService;
@@ -40,44 +41,37 @@ public class DashBoardController {
 		return "detailedstatement";
 	}
 	@GetMapping("/dashboard")
-	public String showDashBoardPage(HttpSession session, Model model) {
-	    String email = (String) session.getAttribute("email");
+    public String showDashBoardPage(HttpSession session, Model model) {
+		UserDto userDto = (UserDto) session.getAttribute("user");
+		if (userDto != null) {
+		    String email = userDto.getEmail();
+		    System.out.println("Email from session = " + email);
+		  
+		
 
-	    if (email != null) {
-	        Optional<UserEntity> profiledetails = userservice.getUserByEmail(email);
+        if (email != null) {
+            Optional<UserEntity> userOpt = userservice.getUserByEmail(email);
+            if (userOpt.isPresent()) {
+                UserEntity user = userOpt.get();
 
-	        if (profiledetails.isPresent()) {
-	            UserEntity user = profiledetails.get();
-	            session.setAttribute("user", user); 
-	            model.addAttribute("user", user);  
-	        }
-	    }
+                // Save user in session and model
+                session.setAttribute("user", user);
+                model.addAttribute("user", user);
 
-	    return "dashboard";
-	}
-//	@GetMapping("/displaybankdetails")
-//	public String displayingBankDetaisInDashboard(HttpSession session,Model model) {
-////		String email=(String)session.getAttribute("email");
-////		if(email!=null) {
-////			Optional<UserEntity> userdetails=userservice.getUserByEmail(email);
-////			if(userdetails.isPresent()) {
-////				UserEntity user=userdetails.get();
-////				Optional<BankAccountEntity> accounts=bankservice.findUserById(user.getUserid());
-////				model.addAttribute("accounts",accounts);
-////				
-////			}
-////		}
-////		return "dashboard";
-//		Long id=(Long) session.getAttribute("bankId");
-//		Optional<BankAccountEntity> account = bankservice.findAccountDetailsById(id.intValue()); 
-//
-//		if (account.isPresent()) {
-//		    model.addAttribute("bankDetails", account.get());
-//		}
-//		return "dashboard";
-//		
-//	}
-//	
-//
-//}
+                // Get and add bank list to model
+                List<ViewBankDto> bankList = bankservice.getActiveBankAccountsByUserId(user.getUserid());
+                System.out.println("Bank list size = " + bankList.size());
+
+                model.addAttribute("bankList", bankList);
+
+                if (!bankList.isEmpty()) {
+                    model.addAttribute("primaryAccount", bankList.get(0)); // First bank is primary
+                }
+            }
+        }
+		}
+
+        return "dashboard";
+    }
+
 }
